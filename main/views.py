@@ -101,6 +101,14 @@ def logout_page(request):
     messages.add_message(request, messages.INFO, "Вы успешно вышли из аккаунта")
     return redirect('index')
 
-
+@login_required
 def my_snippets_page(request):
-    raise NotImplementedError
+    context = {}
+    context['pagename'] = 'Мои сниппеты'
+
+    data = Snippet.objects.all()
+    context['history'] = []
+    for item in data:
+        context['history'].append(item)
+
+    return render(request, 'pages/snippets_list.html', context)
