@@ -46,7 +46,7 @@ class AddSnippetForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'disabled': '',
+                'readonly': '',
             }
         ),
         required=False
