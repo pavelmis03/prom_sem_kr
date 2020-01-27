@@ -61,3 +61,19 @@ class AddSnippetForm(forms.Form):
             }
         )
     )
+
+class FindSnippetForm(forms.Form):
+    search = forms.IntegerField(
+        label='Название',
+        min_value=0,
+        max_value=1000,
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'type': 'number',
+                'class': 'form-control form-control-lg',
+                'id': 'snippet_id',
+                'placeholder': 'введите число',
+            }
+        )
+    )

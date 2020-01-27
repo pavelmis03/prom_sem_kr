@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
 
-from main.forms import LoginForm, AddSnippetForm
+from main.forms import LoginForm, AddSnippetForm, FindSnippetForm
 from main.models import Snippet
 
 
@@ -20,6 +20,19 @@ def get_base_context(request, pagename):
 
 def index_page(request):
     context = get_base_context(request, 'PythonBin')
+
+    if request.method == 'POST':
+        addform = FindSnippetForm(request.POST)
+        return redirect('snippets/' + addform.data['search'])
+            #render(request, '/snippets/' + addform.data['search'], context)
+        '''
+        if addform.is_valid():
+            data = Snippet.objects.all()
+            for item in data:
+                if (item.id == addform.data['search']):
+           '''
+
+    context['addform'] = FindSnippetForm()
     return render(request, 'pages/index.html', context)
 
 
